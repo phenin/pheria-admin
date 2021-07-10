@@ -1,0 +1,5 @@
+export const USER_START = 'USER_START'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const USER_ERROR = 'USER_ERROR'
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'

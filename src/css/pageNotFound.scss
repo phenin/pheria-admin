@@ -1,0 +1,29 @@
+.page-not-found-wrapper {
+    margin-top: 59px;
+    margin-left: 145px;
+    margin-right: 145px;
+
+    padding: 52px;
+}
+
+.page-not-found-wrapper h1 {
+    margin-bottom: 48px;
+    font-weight: 200;
+    font-size: 52px;
+    font-size: 3.71429rem;
+    line-height: 1.23077;
+}
+
+.page-not-found-wrapper a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    color: #f37336;
+}
+
+@media screen and (max-width: 780px) {
+    .page-not-found-wrapper {
+        margin: 24px;
+        padding: 12px;
+    }
+}

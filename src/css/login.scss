@@ -1,0 +1,47 @@
+.sign-in_wrap{
+  background-color: #000;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sign-in {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 414px;
+  height: 414px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  animation: drop 2s ease forwards;
+  animation-iteration-count: 1;
+  &:hover{
+    box-shadow: 0px 0px 50px #333;
+    transform: scale(1.03); 
+  }
+  h1 {
+    color: #fff;
+    font-size: 3rem;
+  }
+  .social-container {
+    button {
+      border: 1px solid #dddddd;
+      border-radius: 50% !important;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 5px;
+      height: 40px;
+      width: 40px;
+    }
+  }
+  .sign-in_input{
+    width: 50%;
+    margin: 10px 0;
+  }
+  .sign-in_link{
+    color: #fff;
+    font-size: 12px;
+  }
+}

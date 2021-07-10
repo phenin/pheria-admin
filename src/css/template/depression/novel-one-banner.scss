@@ -1,0 +1,74 @@
+.depression-novel-one-banner {
+  .header {
+    padding: 1rem;
+    display:flex;
+    line-height: 1.2;
+    .img {
+      order: 1;
+    }
+    .title { 
+      justify-content: center;
+      font-size: 4rem;
+      order: 2;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .content {
+    padding: 1rem;
+  }
+}
+.depression-lonely-girl {
+  background-color: #bdc9de;
+}
+.depression-schizophrenia {
+  background-color: #bdc9de;
+}
+.depression-stress {
+  background-color: #a9a9a9;
+}
+.depression-bipolar-disorder {
+  background-color: #5f7280;
+}
+.depression-bulima-nervosa {
+  background-color: #46a7ef;
+}
+.depression-depression {
+  background-color: #333131;
+  color: white;
+}
+.depression-personality-disorder {
+  background-image: radial-gradient(#797272, #c1aeae, #4b6186)
+}
+.depression-sleep-disorder {
+  background-color: #000000;
+  color: azure;
+}
+.depression-social-phobia {
+  background-color: #2b485d;
+  color: antiquewhite;
+}
+
+@media (max-width: 480px){
+  .depression-novel-one-banner {
+    .header {
+      flex-direction: column;
+      .img {
+        order: 2;
+        display: flex;
+        justify-content: center;
+        img {
+          width: 300px;
+          height: 300px;
+        }
+      }
+      .title{
+        justify-content: center;
+        font-size: 4rem;
+        order: 1;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}

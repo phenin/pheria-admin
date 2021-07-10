@@ -1,0 +1,18 @@
+{
+    "create-account": "Create Account",
+    "sign-up": "Sign Up",
+    "sign-up-title": "Create new account",
+    "sign-up-content": "or use your email for registration",
+    "sign-up-des": "Enter your personal details and start journey with us",
+    "sign-in": "Sign in",
+    "sign-in-title": "Welcome Back!",
+    "sign-in-content": "Enter your email and password to sign in",
+    "sign-in-des": "To keep connected with us please login with your personal info",
+    "forgot-password": "Forgot your password?",
+    "home": "Home",
+    "about-us": "About us",
+    "home-page": "Home page",
+    "faq": "F.A.Q",
+    "404": "Error 404",
+    "info": "The page you're looking for can't be found"
+}
