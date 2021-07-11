@@ -1,15 +1,13 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import useRequireAuth from '../hooks/useRequireAuth'
 
-import { getCookie, setCookie } from 'utils/util'
+import { getCookie } from 'utils/util'
 
 const RequireAuth = (props, config = {}, ContextProvider) => (Component) => {
     const { specifyService, isRequireAdmin } = config
 
     function WrappedComponent() {
-        const dispatch = useDispatch()
         let token = ''
 
         // get token in search params
@@ -24,7 +22,7 @@ const RequireAuth = (props, config = {}, ContextProvider) => (Component) => {
           if (cToken) token = cToken
         }
 
-        const { isChecking, isAuth, isAdmin, profile } = useRequireAuth(token)
+        const { isChecking, isAuth, isAdmin } = useRequireAuth(token)
 
         if (isChecking) {
             return <div>Loading...</div>
@@ -56,7 +54,7 @@ const RequireAuth = (props, config = {}, ContextProvider) => (Component) => {
 
             }
             else {
-                return <Redirect to='/login' />
+                return <Redirect to='/sign-in' />
             }
         }
     }

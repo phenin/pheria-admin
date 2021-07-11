@@ -1,39 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Menu } from 'antd';
 import {
-  AppstoreOutlined,
   WarningOutlined,
   DesktopOutlined,
-  ContainerOutlined,
-  MailOutlined,
 } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
-const { SubMenu } = Menu;
+// const { SubMenu } = Menu;
 
 export default function MenuMobile({collapsed}) {
   const history = useHistory();
 
+  const [active, setActive] = useState('template')
+
   const redirect = (name) =>{
+    setActive(name)
     history.push(`/${name}`);
   }
 
   return (
     <div className="menu">
       <Menu
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
+          defaultSelectedKeys={[active]}
           mode="inline"
           theme="dark"
           inlineCollapsed={collapsed}
         >
-          <Menu.Item key="1" onClick={()=>redirect('template')} icon={<DesktopOutlined />}>
+          <Menu.Item key="template" onClick={()=>redirect('template')} icon={<DesktopOutlined />}>
             Template
           </Menu.Item>
-          <Menu.Item key="2" onClick={()=>redirect('censorship')} icon={<WarningOutlined />}>
+          <Menu.Item key="censorship" onClick={()=>redirect('censorship')} icon={<WarningOutlined />}>
             Censorship
           </Menu.Item>
-          <Menu.Item key="3" icon={<ContainerOutlined />}>
+          {/* <Menu.Item key="3" icon={<ContainerOutlined />}>
             Option 3
           </Menu.Item>
           <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
@@ -49,7 +48,7 @@ export default function MenuMobile({collapsed}) {
               <Menu.Item key="11">Option 11</Menu.Item>
               <Menu.Item key="12">Option 12</Menu.Item>
             </SubMenu>
-          </SubMenu>
+          </SubMenu> */}
         </Menu>
     </div>
     

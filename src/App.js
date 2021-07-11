@@ -24,13 +24,13 @@ const App = () => {
             <ConnectedRouter history={history}>
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
-                        <Route exact path="" render={(props) => {
+                        <Route path="/sign-in" component={Login} />
+                        <Route path="/404" component={PageNotFound} />
+                        <Route path="" render={(props) => {
                             const Component = RequireAuth(props)(HomeAdmin)
                             return <Component />
                         }} />
-                        <Route path="/sign-in" component={Login} />
-                        <Route path="/404" component={PageNotFound} />
-                        {/* <Redirect to="/sign-in" /> */}
+                        <Redirect to="404" />
                     </Switch>
                 </Suspense>
             </ConnectedRouter>

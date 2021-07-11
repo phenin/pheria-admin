@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-// import { getUserProfile } from 'api/user'
+import { fetchUser } from 'api/user'
 
 function useRequireAuth(token) {
     const [isChecking, setChecking] = useState(true)
@@ -11,18 +11,18 @@ function useRequireAuth(token) {
         if (token) {
             setAuth(true)
             setChecking(false)
-            // getUserProfile({ token })
-            //     .then(data => {
-            //         setProfile(data)
-            //         if (data.role && data.role === 'admin') {
-            //             setAdmin(true)
-            //         }
-            //         setAuth(true)
-            //         setChecking(false)
-            //     })
-            //     .catch(() => {
-            //         setChecking(false)
-            //     });
+            fetchUser()
+                .then(data => {
+                    setProfile(data)
+                    if (data.role && data.role === 'admin') {
+                        setAdmin(true)
+                    }
+                    setAuth(true)
+                    setChecking(false)
+                })
+                .catch(() => {
+                    setChecking(false)
+                });
 
         }
         else {
