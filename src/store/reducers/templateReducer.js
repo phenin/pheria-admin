@@ -1,7 +1,6 @@
 import * as ActionTypes from '../actionTypes'
 
 const initialState = {
-    token: null,
     listTemplate: [],
     total: 0,
     template: null,
@@ -14,6 +13,7 @@ function reducer(state = initialState, action) {
         case ActionTypes.TEMPLATE_ERROR:
         case ActionTypes.TEMPLATE_START:
         case ActionTypes.GET_LIST_TEMPLATE_SUCCESS:
+        case ActionTypes.SET_TEMPLATE:
             return {...state, ...action.payload};
             
         default:

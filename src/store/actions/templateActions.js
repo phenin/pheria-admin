@@ -37,3 +37,13 @@ export const getListTemplate = (params) => async (dispatch, getState) => {
   }
 
 }
+
+export const setTemplate = (template) => async (dispatch, getState) => {
+  console.log(template)
+  dispatch({
+    type: ActionTypes.SET_TEMPLATE,
+    payload: {
+      template: template
+    }
+  })
+}

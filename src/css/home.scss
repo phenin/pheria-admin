@@ -6,3 +6,9 @@
 		
 	// }
 }
+.template_header {
+	margin: 1rem;
+	&-name {
+		text-align: center;
+	}
+}

@@ -3,8 +3,9 @@ import 'css/home.scss'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import { useTranslation } from 'react-i18next'
-import { getListTemplate } from 'store/actions/templateActions'
-import { Table, Space } from 'antd';
+import { getListTemplate, setTemplate } from 'store/actions/templateActions'
+import { Table, Space, Row, Col, Button } from 'antd';
+import Modal from "./modal"
 
 export default function Template() {
   const { t } = useTranslation('common')
@@ -12,8 +13,7 @@ export default function Template() {
   // const history = useHistory()
   const state = useSelector(stateSelector, shallowEqual)
   const [query, setQuery] = useState({limit: 10, page: 1})
-
-  console.log(state.listTemplate)
+  const [visible, setVisible] = useState(false)
 
   useEffect(()=>{
     dispatch(getListTemplate(query))
@@ -40,15 +40,37 @@ export default function Template() {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <p>Edit</p>
-          <p>Delete</p>
+          <a href onClick={()=>editTemplate(record)}>Edit</a>
+          <a href>Delete</a>
         </Space>
       ),
     },
   ];
 
+  const editTemplate = (record) => {
+    dispatch(setTemplate(record))
+    setVisible(true)
+    console.log(record)
+  }
+
+  const createTemplate = () => {
+    setVisible(true)
+  }
+
+  const closeModal = () =>{
+    setVisible(false)
+  }
+
   return (
     <div >
+      <Row justify='round' className="template_header">
+        <Col span={20} className="template_header-name">
+          <h3>Template</h3>
+        </Col>
+        <Col span={4}>
+          <Button type="primary" onClick={()=>createTemplate()}>Add Template</Button>
+        </Col>
+      </Row>
       <Table columns={columns} dataSource={state.listTemplate} 
         pagination={{ total: state.total,
           showTotal: total => `Total ${total} Template`,
@@ -65,6 +87,13 @@ export default function Template() {
           pageSizeOptions: ['5', '10', '20', '30']
         }}
       />
+      {visible && 
+        <Modal 
+          centered 
+          visible={visible} 
+          closeModal={closeModal}
+        />
+      }
     </div>
   )
 }
