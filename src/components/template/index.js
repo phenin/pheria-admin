@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import 'css/home.scss'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom";
@@ -11,12 +11,13 @@ export default function Template() {
   const dispatch = useDispatch()
   // const history = useHistory()
   const state = useSelector(stateSelector, shallowEqual)
+  const [query, setQuery] = useState({limit: 10, page: 1})
 
   console.log(state.listTemplate)
 
   useEffect(()=>{
-    dispatch(getListTemplate())
-  },[])
+    dispatch(getListTemplate(query))
+  },[query, dispatch, getListTemplate])
 
   const columns = [
     {
@@ -48,7 +49,22 @@ export default function Template() {
 
   return (
     <div >
-      <Table columns={columns} dataSource={state.listTemplate} />
+      <Table columns={columns} dataSource={state.listTemplate} 
+        pagination={{ total: state.total,
+          showTotal: total => `Total ${total} Template`,
+          onChange: ((page, pageSize) => {
+            setQuery({
+              page: page,
+              limit: pageSize
+            }, () => {
+                this.changeQuery()
+            })
+          }),
+          defaultPageSize: 5, 
+          showSizeChanger: true, 
+          pageSizeOptions: ['5', '10', '20', '30']
+        }}
+      />
     </div>
   )
 }
@@ -56,6 +72,7 @@ export default function Template() {
 function stateSelector(state) {
   return {
     listTemplate: state.template.listTemplate,
+    total: state.template.total
   }
 }
 
