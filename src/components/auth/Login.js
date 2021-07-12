@@ -4,9 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Input, Button } from "antd"
 import { useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom";
-import {
-  login,
-} from 'store/actions/userActions'
+import { login } from 'store/actions/userActions'
 
 export default function Login() {
   const { t } = useTranslation('common')
@@ -22,9 +20,9 @@ export default function Login() {
     })
   }
 
-  const handleSubmit = () => {
-    dispatch(login(form))
-    history.push('/home')
+  const handleSubmit = async () => {
+    const success = await dispatch(login(form))
+    if(success) history.push('/home')
   }
 
   return (
