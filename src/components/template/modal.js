@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Modal, Input, Button, Form, Select } from "antd"
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
@@ -15,13 +15,28 @@ export default function ModalTemplate({visible, closeModal}) {
 
   const [form] = Form.useForm();
 
+  const [image, setImage] = useState([])
+
   const formItemLayout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
   }
 
   const onFinish = (value) =>{
+    console.log(image)
     console.log(value)
+  }
+
+  const upload = (listimage) =>{
+    const list = listimage.map(item => {
+      return {
+        uid: item.uid,
+        status: item.status,
+        url: item.response && item.response.url,
+        name: item.name
+      }
+    })
+    setImage(list)
   }
 
   return (
@@ -96,7 +111,7 @@ export default function ModalTemplate({visible, closeModal}) {
           <Input placeholder="Màu chữ template" />
         </Form.Item>
 
-        <UploadImage />
+        <UploadImage upload={upload}/>
 
         <Form.Item >
           <Button type="primary" htmlType="submit">Submit</Button>
