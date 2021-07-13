@@ -12,7 +12,7 @@ export default function Template() {
   const dispatch = useDispatch()
   // const history = useHistory()
   const state = useSelector(stateSelector, shallowEqual)
-  const [query, setQuery] = useState({limit: 10, page: 1})
+  const [query, setQuery] = useState({limit: 5, page: 1})
   const [visible, setVisible] = useState(false)
 
   useEffect(()=>{
@@ -50,15 +50,16 @@ export default function Template() {
   const editTemplate = (record) => {
     dispatch(setTemplate(record))
     setVisible(true)
-    console.log(record)
   }
 
   const createTemplate = () => {
+    dispatch(setTemplate(null))
     setVisible(true)
   }
 
   const closeModal = () =>{
     setVisible(false)
+    dispatch(getListTemplate(query))
   }
 
   return (

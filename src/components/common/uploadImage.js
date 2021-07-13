@@ -16,8 +16,7 @@ class PicturesWall extends Component {
     previewVisible: false,
     previewImage: '',
     previewTitle: '',
-    fileList: [
-    ],
+    fileList: this.props.fileList || [],
   };
 
   handleCancel = () => this.setState({ previewVisible: false });

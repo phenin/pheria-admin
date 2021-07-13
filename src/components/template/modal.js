@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Modal, Input, Button, Form, Select } from "antd"
+import { Modal, Input, Button, Form, Select, message } from "antd"
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
-import { useHistory } from "react-router-dom"
 import UploadImage from "components/common/uploadImage"
+import { LoadingOutlined } from '@ant-design/icons';
+import { createUpdateTemplate } from "store/actions/templateActions"
 
 const {Option} = Select
 
 export default function ModalTemplate({visible, closeModal}) {
   const { t } = useTranslation('common')
   const dispatch = useDispatch()
-  const history = useHistory()
   const state = useSelector(stateSelector, shallowEqual)
 
   const [form] = Form.useForm();
@@ -22,9 +22,21 @@ export default function ModalTemplate({visible, closeModal}) {
     wrapperCol: { span: 16 },
   }
 
-  const onFinish = (value) =>{
-    console.log(image)
-    console.log(value)
+  const onFinish = async (value) =>{
+    const _id = state.template && state.template._id
+    const data = {
+      _id,
+      ...value,
+      image
+    }
+    const success = await dispatch(createUpdateTemplate(data))
+    if(success) {
+      message.success(`${_id ?'Cập nhật Template thành công' :'Thêm mới Template thành công'}`);
+    }
+    else{
+      message.success(`${_id ?'Cập nhật Template thất bại' :'Thêm mới Template thất bại'}`);
+    }
+    closeModal()
   }
 
   const upload = (listimage) =>{
@@ -41,9 +53,10 @@ export default function ModalTemplate({visible, closeModal}) {
 
   return (
     <Modal 
-      title="Create Template" 
+      title={`${state.template && state.template._id ?'Cập nhật Template' :'Thêm mới Template'}`}
       visible={visible} 
       onCancel={()=>closeModal(false)}
+      footer={null}
     >
       <Form
         {...formItemLayout}
@@ -111,10 +124,14 @@ export default function ModalTemplate({visible, closeModal}) {
           <Input placeholder="Màu chữ template" />
         </Form.Item>
 
-        <UploadImage upload={upload}/>
+        <UploadImage fileList={state.template && state.template.image} upload={upload}/>
 
         <Form.Item >
-          <Button type="primary" htmlType="submit">Submit</Button>
+          {
+            state.loading ? <LoadingOutlined /> : 
+            <Button type="primary" htmlType="submit">
+              {`${state.template&&state.template._id ?'Cập nhật Template' :'Tạo mới Template'}`}</Button>
+          }
         </Form.Item>
       </Form>
     </Modal>
@@ -123,5 +140,6 @@ export default function ModalTemplate({visible, closeModal}) {
 function stateSelector(state) {
   return {
     template: state.template.template,
+    loading: state.template.loading
   }
 }

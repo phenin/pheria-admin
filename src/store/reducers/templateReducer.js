@@ -14,6 +14,9 @@ function reducer(state = initialState, action) {
         case ActionTypes.TEMPLATE_START:
         case ActionTypes.GET_LIST_TEMPLATE_SUCCESS:
         case ActionTypes.SET_TEMPLATE:
+        case ActionTypes.CREATE_TEMPLATE_SUCCESS:
+        case ActionTypes.UPDATE_TEMPLATE_SUCCESS:
+        case ActionTypes.DELETE_TEMPLATE_SUCCESS:
             return {...state, ...action.payload};
             
         default:
