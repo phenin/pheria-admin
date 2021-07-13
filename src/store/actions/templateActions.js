@@ -77,11 +77,22 @@ export const createUpdateTemplate = (params) => async (dispatch, getState) => {
 }
 
 export const setTemplate = (template) => async (dispatch, getState) => {
-  console.log(template)
+  
+  const images = template.image.map(image => {
+    return {
+      ...image,
+      url: image.url ? `${process.env.REACT_APP_API}/${image.url}` : image
+    }
+  })
+  const templateClone ={
+    ...template,
+    image: images
+  }
+  console.log(templateClone)
   dispatch({
     type: ActionTypes.SET_TEMPLATE,
     payload: {
-      template: template
+      template: templateClone
     }
   })
 }
