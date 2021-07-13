@@ -78,7 +78,7 @@ export const createUpdateTemplate = (params) => async (dispatch, getState) => {
 
 export const setTemplate = (template) => async (dispatch, getState) => {
   
-  const images = template.image.map(image => {
+  const images =template && template.image.map(image => {
     return {
       ...image,
       url: image.url ? `${process.env.REACT_APP_API}/${image.url}` : image
