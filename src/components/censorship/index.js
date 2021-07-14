@@ -1,11 +1,6 @@
-import React from 'react'
-import 'css/home.scss'
+import React from 'react';
 
-export default function Censorship() {
+export default function Censorship(){
 
-  return (
-    <div >
-      Censorship
-    </div>
-  )
+    return(<div>Censorship</div>)
 }

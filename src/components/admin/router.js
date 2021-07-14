@@ -5,6 +5,10 @@ import asyncComponent from "hoc/AsyncFunc";
 
 const routes = [
   {
+    path: "/group",
+    component: asyncComponent(() => import("components/group"))
+  },
+  {
     path: "/template",
     component: asyncComponent(() => import("components/template"))
   },

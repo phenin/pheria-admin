@@ -3,11 +3,13 @@ import { connectRouter } from 'connected-react-router'
 
 import user from './userReducer'
 import template from './templateReducer'
+import group from './groupPreducer'
 
 const createRootReducer = (history) => combineReducers({
   router: connectRouter(history),
   user,
-  template
+  template,
+  group
 })
 
 export default createRootReducer

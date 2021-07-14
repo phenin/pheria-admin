@@ -3,6 +3,7 @@ import { Menu } from 'antd';
 import {
   WarningOutlined,
   DesktopOutlined,
+  HddOutlined,
 } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
@@ -26,12 +27,16 @@ export default function MenuMobile({collapsed}) {
           theme="dark"
           inlineCollapsed={collapsed}
         >
+          <Menu.Item key="group" onClick={()=>redirect('group')} icon={<HddOutlined />}>
+            Group
+          </Menu.Item>
           <Menu.Item key="template" onClick={()=>redirect('template')} icon={<DesktopOutlined />}>
             Template
           </Menu.Item>
           <Menu.Item key="censorship" onClick={()=>redirect('censorship')} icon={<WarningOutlined />}>
             Censorship
           </Menu.Item>
+          
           {/* <Menu.Item key="3" icon={<ContainerOutlined />}>
             Option 3
           </Menu.Item>
