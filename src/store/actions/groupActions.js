@@ -51,9 +51,12 @@ export const createUpdateGroup = (params) => async (dispatch, getState) => {
   try {
     if(params._id){
       await fetchUpdateGroup(params)
+      console.log("loading update")
     }
     else{
       await fetchCreateGroup(params)
+      console.log("loading")
+
     }
 
     dispatch({

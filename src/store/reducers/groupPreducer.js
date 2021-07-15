@@ -17,7 +17,7 @@ function reducer(state = initialState, action) {
         case ActionTypes.CREATE_GROUP_SUCCESS:
         case ActionTypes.UPDATE_GROUP_SUCCESS:
         case ActionTypes.DELETE_GROUP_SUCCESS:
-            console.log({...state, ...action.payload});
+          //  console.log({...state, ...action.payload});
             return {...state, ...action.payload};
             
         default:
