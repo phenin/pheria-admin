@@ -24,8 +24,10 @@ export default function ModalForm(props){
         // console.log(selectorDescription.children[1].value)
         temp={...temp,
             "name":selectorName.children[1].value,
-            "description":selectorDescription.children[1].value
+            "description":selectorDescription.children[1].value,
+            "_id":props.id
         }  
+       
             await  dispatch(createUpdateGroup(temp))
             setLoading(false);
             props.closeModal();
@@ -48,8 +50,8 @@ export default function ModalForm(props){
             </Button>
           ]}
         >
-            <Input className="name-input" size="default" placeholder="Name" prefix={<UserOutlined />}></Input>
-            <Input size="default" className="description-input" placeholder="Description" prefix={<UserOutlined />}></Input>
+            <Input defaultValue={props.nameValue} className="name-input" size="default" placeholder="Name" prefix={<UserOutlined />}></Input>
+            <Input defaultValue={props.descriptionValue} size="default" className="description-input" placeholder="Description" prefix={<UserOutlined />}></Input>
             <AliyunOSSUpload></AliyunOSSUpload>
         </Modal>
 

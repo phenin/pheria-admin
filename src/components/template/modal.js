@@ -40,6 +40,7 @@ export default function ModalTemplate({visible, closeModal}) {
   }
 
   const upload = (listimage) =>{
+    console.log(state)
     const list = listimage.map(item => {
       return {
         uid: item.uid,

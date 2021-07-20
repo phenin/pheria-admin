@@ -88,7 +88,7 @@ export const setTemplate = (template) => async (dispatch, getState) => {
     ...template,
     image: images
   }
-  console.log(templateClone)
+  console.log("template Clone",templateClone)
   dispatch({
     type: ActionTypes.SET_TEMPLATE,
     payload: {

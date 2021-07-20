@@ -3,23 +3,26 @@ import 'css/home.scss'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import { useTranslation } from 'react-i18next'
-import { getListGroup, setGroup, createUpdateGroup } from 'store/actions/groupActions'
-import { Table, Space, Row, Col, Button, Modal } from 'antd';
-import ModalForm from './modalform';
+import { getListGroup, setGroup, deleteGroup } from 'store/actions/groupActions'
+import { Table, Space, Row, Col, Button } from 'antd';
+import Modal from "./modal";
 
 export default function Group() {
   const { t } = useTranslation('common')
   const dispatch = useDispatch()
-  // const history = useHistory()
   const state = useSelector(stateSelector, shallowEqual)
   const [query, setQuery] = useState({limit: 5, page: 1})
   const [visible, setVisible] = useState(false)
+  const [check, setCheck] = useState(false);
+  const [showEdit, setShowEdit] = useState(false)
+  const [temp, setTemp] = useState({})
  
 
 
+ 
   useEffect(()=>{
     dispatch(getListGroup(query))
-  },[query, dispatch, getListGroup])
+  },[query, dispatch, getListGroup, check])
 
   const columns = [
     {
@@ -33,6 +36,11 @@ export default function Group() {
       key: 'description',
     },
     {
+      title: 'Image',
+      dataIndex: 'image',
+      key: 'image',
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (text, record) => (
@@ -44,42 +52,30 @@ export default function Group() {
       ),
     },
   ];
-
-
-  const handleDelete = (record) => {
-    // let temp= {
-    //   "name": record.name,
-    //   "desciption": record.desciption,
-    //   "image": record.image,
-    //   "hidden":true
-    // }
-    //   dispatch(createUpdateGroup({_id:record._id, ...temp}))
-    
+  const handleDelete = async(record) => {
     let temp= {
-      ...record,
-      "hidden":true
+      "_id":record._id
     }
-      dispatch(createUpdateGroup(temp))
-      //Waiting for API
-      // console.log(temp)
+     await dispatch(deleteGroup(temp))
+     setCheck(!check);
+    //  console.log(check);
   }
 
+
   const editGroup = (record) => {
-    // dispatch(setGroup(record))
-    console.log(record);
-    // setVisible(true)
+    dispatch(setGroup(record))
+    setVisible(true)
   }
 
   const createGroup = () => {
-    // dispatch(setGroup(null))
+    dispatch(setGroup(null))
     setVisible(true)
   }
 
   const closeModal = () =>{
     setVisible(false)
-    // dispatch(getListGroup(query))
+    dispatch(getListGroup(query))
   }
-  console.log("listGroup",state.listGroup)
 
   return (
     <div >
@@ -107,7 +103,13 @@ export default function Group() {
           pageSizeOptions: ['5', '10', '20', '30']
         }}
       />
-      {visible?<ModalForm closeModal={closeModal} visible={visible}></ModalForm>:<></>}
+      {visible && 
+        <Modal 
+          centered 
+          visible={visible} 
+          closeModal={closeModal}
+        />
+      }
       
     </div>
   )

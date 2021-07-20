@@ -48,6 +48,7 @@ export default function Template() {
   ];
 
   const editTemplate = (record) => {
+    console.log(record)
     dispatch(setTemplate(record))
     setVisible(true)
   }

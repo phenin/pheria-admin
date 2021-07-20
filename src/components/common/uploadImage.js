@@ -36,6 +36,7 @@ class PicturesWall extends Component {
   handleChange = ({ fileList }) => {
     this.setState({ fileList });
     this.props.upload(fileList)
+    console.log("file list ",fileList)
   }
 
   render() {
